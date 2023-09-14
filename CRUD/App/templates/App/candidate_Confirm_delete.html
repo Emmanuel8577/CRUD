@@ -1,0 +1,45 @@
+{% extends 'App/candidate_list.html' %}
+
+<!---------BG NAVBAR-->
+
+{% block navbar %} bg-danger {% endblock navbar %}
+
+<!----------Nav Content----->
+{% block nav-content %}
+<i class="fas fa-user-times"></i>&nbsp;&nbsp; DELETE CANDIDATE
+{% endblock nav-content %}
+
+<!----------Footer------>
+{% block footer %} style="color:#ff7f7f" {% endblock footer %}
+
+<!---------Page Content----->
+{% block content %}
+<br>
+<div class="container mt-2" style="width:450px">
+    <div class="card p-3 border-dark">
+        <h6 class="modal-title ">
+            <i class="fas fa-trash-alt"></i>&nbsp;&nbsp; Delete Candidate
+        </h6>
+        <hr>
+        <div class="text-center text-danger"><i class="far fa-times-circle fa-5x mb-4 mt-2"></i>
+            <div class="text-center text-danger">
+                <span>Do you want to Delete this Candidate ???</span>
+                <div class="text-dark mt-3 mb-2">Candidate: <strong>{{candidate.name}}</strong></div>
+            </div>
+        </div>
+        <form method="POST" class=" d-flex justify-content-center">
+            {% csrf_token %}
+
+            <input class="btn btn-outline-danger btn-sm ms-2" type="submit" value="Delete" style="float:right">
+            <a href="{% url 'read' %}" class="btn btn-secondary btn-sm ms-2" style="float:right;">Cancel</a>
+        </form>
+    </div>
+    <hr><br>
+    <span class="text-danger">if you proceed, this data will become unrecoverable</span>
+</div>
+{% for message in messages %}
+<div class="alert alert-primary alert-dismissible text-center fade show {{message.tags}}" role="alert">{{messasge}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{%endfor%}
+{% endblock content %}

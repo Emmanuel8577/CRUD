@@ -1,0 +1,35 @@
+{% extends 'App/candidate_list.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block nav-content %}
+
+<i class="fas fa-user"></i> &nbsp;&nbsp; CANDIDATES
+{% endblock nav-content %}
+
+
+{% block content %}
+<div class="container mb-6"  style="width: 400px; height: 100px;">
+  <div class="card p-3 border-dark">
+     <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{ form.name| as_crispy_field}}
+            {{ form.phone| as_crispy_field}}
+            {{ form.email| as_crispy_field}}
+            {{ form.gender| as_crispy_field}}
+            {{ form.career| as_crispy_field}}
+
+         <div class="d-grid gap-2">
+           <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{% url 'read' %}" class="btn btn-secondary">Cancel</a>
+         </div>
+       </form>
+    </div>
+        <!------------Message Alert-->
+      {% for message in messages %}
+      <div class="alert alert-primary alert-dismissible text-center fade show {{message.tags}}" role="alert">{{messasge}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+</div>
+{% endblock content %}
